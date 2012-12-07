@@ -1,7 +1,10 @@
 package com.park.inter;
+import java.util.Map;
+
 import com.park.Car;
-import com.park.ParkManager;
+import com.park.ParkBoy;
+import com.park.ParkSeat;
 import com.park.Ticket;
 public interface IStrategy {
-	public Ticket setCar(Car car,ParkManager pm);
+	public ParkSeat getParkSeat(Map<String,ParkSeat> map);
 }

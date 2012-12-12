@@ -32,4 +32,10 @@ public class AverageStrategy extends AbstractStrategy implements Strategy {
         }
         throw new ParkException("没有空的停车位！");
     }
+
+	@Override
+	public String getStrategyName() {
+		// TODO Auto-generated method stub
+		return "平均策略";
+	}
 }

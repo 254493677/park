@@ -35,4 +35,10 @@ public class VacancyRateStrategy extends AbstractStrategy implements Strategy {
         }
         throw new ParkException("没有空的停车位！");
 	}
+
+	@Override
+	public String getStrategyName() {
+		// TODO Auto-generated method stub
+		return "空置率策略";
+	}
 }

@@ -19,14 +19,18 @@ public class Park {
     private String code;
     // 是否被管理
     private boolean managed = false;
+    //停车场名称
+    private String parkName;
+    
     
     /**
      * 停车场构造器
      * @param code 停车场编号
      * @param num 车位数
      */
-    public Park(String code, int num) {
+    public Park(String code,String parkName, int num) {
     	this.code = code;
+    	this.parkName=parkName;
         this.totalNum = num;
     }
 
@@ -105,6 +109,13 @@ public class Park {
 		return code;
 	}
 
+	/**
+	 * 获取停车场名称
+	 * @return
+	 */
+	public String getParkName(){
+		return parkName;
+	}
 	/**
 	 * 设置停车场是否被管理
 	 * @param managed	true是 false否

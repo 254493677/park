@@ -17,4 +17,6 @@ public interface Strategy {
      * @return	停车票据
      */
     public Ticket in(Car car, List<Park> parkList);
+    
+    public String getStrategyName();
 }

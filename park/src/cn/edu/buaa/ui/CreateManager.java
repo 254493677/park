@@ -17,6 +17,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Dialog.ModalExclusionType;
@@ -223,5 +226,11 @@ public class CreateManager extends JFrame {
 				
 			}
 		});
+		this.addWindowFocusListener(new WindowFocusListener(){
+			public void windowGainedFocus(WindowEvent e){}
+			public void windowLostFocus(WindowEvent e){
+			    e.getWindow().toFront();
+			}
+			});
 	}
 }

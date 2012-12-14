@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 
 
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 
 
 import cn.edu.buaa.park.ParkDirector;
@@ -38,6 +40,7 @@ public class BossReport extends JFrame {
 				}
 			}
 		});
+		
 	}
 
 	/**
@@ -61,7 +64,12 @@ public class BossReport extends JFrame {
 		jsp.setViewportView(textArea);
 		this.add(jsp);
 		
-		
+		this.addWindowFocusListener(new WindowFocusListener(){
+			public void windowGainedFocus(WindowEvent e){}
+			public void windowLostFocus(WindowEvent e){
+			    e.getWindow().toFront();
+			}
+			});
 		
 	}
 }

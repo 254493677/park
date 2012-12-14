@@ -16,6 +16,9 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Dialog.ModalExclusionType;
@@ -64,7 +67,7 @@ public class ParkBoyOperator extends JFrame {
 	public ParkBoyOperator() {
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("停车Boy操作");
-		setBounds(100, 100, 490, 467);
+		setBounds(100, 100, 490, 330);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -72,65 +75,65 @@ public class ParkBoyOperator extends JFrame {
 		
 		JButton btnNewButton = new JButton("停车");
 		
-		btnNewButton.setBounds(179, 196, 64, 23);
+		btnNewButton.setBounds(179, 116, 64, 23);
 		contentPane.add(btnNewButton);
 
 		JLabel lblboy = new JLabel("停车Boy：");
-		lblboy.setBounds(39, 21, 94, 15);
+		lblboy.setBounds(14, 21, 94, 15);
 		contentPane.add(lblboy);
 		                
 		 final JComboBox comboBox = new JComboBox();
 		 
 		 //获取停车Boy列表
 		 Vector<String> vt=new Vector<String>();
-		 vt.add("");
+		 vt.add("请选择停车Boy");
 		 for(int i=0;i<pm.getBoyList().size();i++){
 			 ParkBoy pb=(ParkBoy)pm.getBoyList().get(i);
 			 //管理有停车场
 			 if(pb.getParkList().size()>0){
-				 vt.add(pb.getCode() + " " + pb.getName());
+				 vt.add(pb.getCode() + " " + pb.getName()+ " "+ pb.getStrategy().getStrategyName());
 			 }
 		 }
 		 comboBox.setModel(new DefaultComboBoxModel(vt.toArray()));
 		 comboBox.setSelectedIndex(0);
-		 comboBox.setBounds(114, 14, 164, 28);
+		 comboBox.setBounds(65, 14, 277, 28);
 		 contentPane.add(comboBox);
-		 
-		 final JTextArea textArea = new JTextArea();
-		 textArea.setBounds(114, 54, 244, 78);
-		 contentPane.add(textArea);
 		 
 		 JButton btnNewButton_1 = new JButton("取车");
 		
-		 btnNewButton_1.setBounds(179, 278, 64, 23);
+		 btnNewButton_1.setBounds(179, 160, 64, 23);
 		 contentPane.add(btnNewButton_1);
 		 
 		 final JTextArea textArea_1 = new JTextArea();
 		 textArea_1.setEditable(false);
-		 textArea_1.setBounds(253, 175, 211, 244);
+		 textArea_1.setBounds(253, 75, 211, 198);
 		 contentPane.add(textArea_1);
 		 
-		 final JLabel lblNewLabel = new JLabel("");
-		 lblNewLabel.setBounds(14, 142, 407, 23);
+		 final JLabel lblNewLabel = new JLabel("欢迎光临");
+		 lblNewLabel.setBounds(14, 75, 229, 23);
 		 contentPane.add(lblNewLabel);
 		 
 		 textField = new JTextField();
-		 textField.setBounds(79, 197, 90, 21);
+		 textField.setBounds(69, 117, 100, 21);
 		 contentPane.add(textField);
 		 textField.setColumns(10);
 		 
 		 JLabel lblNewLabel_1 = new JLabel("车牌号：");
-		 lblNewLabel_1.setBounds(14, 200, 54, 15);
+		 lblNewLabel_1.setBounds(14, 120, 54, 15);
 		 contentPane.add(lblNewLabel_1);
 		 
 		 JLabel lblNewLabel_2 = new JLabel("停车票号：");
-		 lblNewLabel_2.setBounds(10, 254, 79, 15);
+		 lblNewLabel_2.setBounds(10, 164, 79, 15);
 		 contentPane.add(lblNewLabel_2);
 		 
 		 textField_1 = new JTextField();
-		 textField_1.setBounds(39, 279, 115, 21);
+		 textField_1.setBounds(75, 161, 94, 21);
 		 contentPane.add(textField_1);
 		 textField_1.setColumns(10);
+		 
+		 JLabel label = new JLabel("-----------------------------------------------------------------");
+		 label.setBounds(14, 46, 454, 15);
+		 contentPane.add(label);
 		                
 		                
 		 setVisible(true);
@@ -188,8 +191,8 @@ public class ParkBoyOperator extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 		String id= comboBox.getSelectedItem().toString().split(" ")[0];
-		 		if(id==null || id.equals("")){
-		 			textArea.setText("");
+		 		if(id==null || id.equals("请选择停车Boy")){
+		 			
 		 			textArea_1.setText("");
 		 		}
 		 		
@@ -198,12 +201,7 @@ public class ParkBoyOperator extends JFrame {
 					 //管理有停车场
 					 if(pb.getParkList().size()>0){
 						 if(id.equals(pb.getCode())){
-							 textArea.setText("名称："+pb.getName()+", 策略："+pb.getStrategy().getStrategyName() + "\n");
-							 for(int j=0;j<pb.getParkList().size();j++){
-								 Park pk=(Park)pb.getParkList().get(j);
-								 textArea.setText(textArea.getText() + "停车场编号：" + pk.getCode()+", 名称:"+pk.getParkName() + ",车位数:"+ pk.getTotalNum() +"\n"); 
-							 }
-							 
+							
 							//停车场信息
 							 
 							 textArea_1.setText(pb.printParkInfoForBoy());
@@ -213,11 +211,13 @@ public class ParkBoyOperator extends JFrame {
 					 }
 				 }
 		 		
-		 		
-		 		
-		 		
-		 		
 		 	}
 		 });
+		this.addWindowFocusListener(new WindowFocusListener(){
+			public void windowGainedFocus(WindowEvent e){}
+			public void windowLostFocus(WindowEvent e){
+			    e.getWindow().toFront();
+			}
+			});
 	}
 }

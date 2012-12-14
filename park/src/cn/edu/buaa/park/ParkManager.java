@@ -48,6 +48,14 @@ public class ParkManager {
 		park.setManaged(true);
 		this.park = park;
 	}
+	
+	/**
+	 * 获取管理的停车场
+	 * @return
+	 */
+	public Park getPark(){
+		return this.park;
+	}
 
 	/**
 	 * 管理停车BOY
@@ -209,39 +217,47 @@ public class ParkManager {
 	}
 
 
-//	
-//	/**
-//	 * 停车
-//	 */
-//	private void inCar() {
-//		if(isFull()) {
-//			System.out.println("停车场已满，你还是找找其他停车场吧！");
-//			return;
-//		}
-//		System.out.println("请输入你停的车的车牌号：");
-//		String input = super.readInput();
-//		if(contain(new Ticket(input))) {
-//			System.out.println("你要停的车已经停在我们的停车场里了，你的是套牌车吧？你还不走... 110... 嘟—— 嘟——");
-//			return;
-//		}
-//		Ticket ticket = in(new Car(input));
-//		System.out.println("OK，你的车停好了，请记住你的取车票据号[" + ticket.getCode() + "]，凭此票据号取车。");
-//	}
-//	
-//	/**
-//	 * 取车
-//	 */
-//	private void outCar() {
-//		System.out.println("请输入你的取车票据号：");
-//		String input = super.readInput();
-//		if(!contain(new Ticket(input))) {
-//			System.out.println("我们这没有停你的车，你是不是记错了。");
-//			return;
-//		}
-//		Car car = out(new Ticket(input));
-//		System.out.println("OK，你的车交给你了，车牌是[" + car.getCode() + "]，欢迎下次光临。");
-//	}
-//	
+	
+	/**
+	 * 停车
+	 */
+	public String inCar(String carID) {
+		String msg="";
+		if(isFull()) {
+			msg = "对不起，停车场已满！";
+			return msg;
+		}
+		if(carID.equals("")){
+			msg = "请输入你停的车的车牌号!";
+			return msg;
+		}
+		
+		if(contain(new Ticket(carID))) {
+			msg = "你要停的车已经停在我们的停车场里了!";
+			return msg;
+		}
+		Ticket ticket = in(new Car(carID));
+		msg= "OK，请记住你的取车票据号[" + ticket.getCode() + "]。";
+		return msg;
+	}
+	
+	/**
+	 * 取车
+	 */
+	public String outCar(String ticket) {
+		if(ticket.equals("")){
+			return "请输入你的取车票据号!";
+		}
+		
+		
+		if(!contain(new Ticket(ticket))) {
+			return "我们这没有停你的车。";
+			
+		}
+		Car car = out(new Ticket(ticket));
+		return "OK，车牌是[" + car.getCode() + "]，欢迎下次光临。";
+	}
+	
 	/**
 	 * 打印停车场信息
 	 */
@@ -273,6 +289,35 @@ public class ParkManager {
 			emptyNum += boy.getEmptyNum();
 			totalNum += boy.getTotalNum();
 		}
+		text =text + "        共计车位数：" + totalNum+"\n";
+		text =text + "        共计空位数：" + emptyNum+"\n";
+		return text;
+	}
+	/**
+	 * 仅打印停车场信息
+	 * @return
+	 */
+	public String printParkInfoBySingle(){
+		String text="";
+
+		if(park == null && getParkBoyList().size() == 0) {
+			text="目前没有管理任何停车场！" ;
+			
+			return text;
+			
+		}
+		int emptyNum = 0;
+		int totalNum = 0;
+		
+		if(park != null) {
+			text= "        停车场编号：" + park.getCode() +"\n";
+			text=text+ "        停车场名称：" + park.getParkName() +"\n";
+			text=text+"                车位数：" + park.getTotalNum()+"\n";
+			text=text+"                空位数：" + park.getEmptyNum()+"\n";
+			emptyNum += park.getEmptyNum();
+			totalNum += park.getTotalNum();
+		}
+		
 		text =text + "        共计车位数：" + totalNum+"\n";
 		text =text + "        共计空位数：" + emptyNum+"\n";
 		return text;

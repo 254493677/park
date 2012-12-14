@@ -246,7 +246,7 @@ public class ParkBoy{
 		
 		String txt="";
 		if(isFull()) {
-			txt="停车场已满，你还是找找其他停车场吧！";
+			txt="对不起，停车场已满。";
 			return txt;
 		}
 		if(carID.equals("")){
@@ -255,11 +255,11 @@ public class ParkBoy{
 		}
 		
 		if(contain(new Ticket(carID))) {
-			txt="你要停的车已经停在我们的停车场里了，你的是套牌车吧？你还不走... 110... 嘟—— 嘟——";
+			txt="你要停的车已经停在我们的停车场里了。";
 			return txt;
 		}
 		Ticket ticket = in(new Car(carID));
-		txt = "OK，你的车停好了，请记住你的取车票据号[" + ticket.getCode() + "]，凭此票据号取车。";
+		txt = "OK，请记住你的取车票据号[" + ticket.getCode() + "]，";
 		return txt;
 	}
 	
@@ -273,10 +273,10 @@ public class ParkBoy{
 		
 		if(!contain(new Ticket(ticketnum))) {
 		
-			return "我们这没有停你的车，你是不是记错了。";
+			return "我们这没有停你的车。";
 		}
 		Car car = out(new Ticket(ticketnum));
-		return "OK，你的车交给你了，车牌是[" + car.getCode() + "]，欢迎下次光临。";
+		return "OK，车牌是[" + car.getCode() + "]，欢迎下次光临。";
 	}
 	
 	/**

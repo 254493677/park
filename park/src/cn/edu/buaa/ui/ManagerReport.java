@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 
 import  cn.edu.buaa.park.ParkManage;
 import cn.edu.buaa.park.ParkManager;
@@ -78,7 +80,12 @@ public class ManagerReport extends JFrame {
 		jsp.setViewportView(textArea);
 		this.add(jsp);
 		
-		
+		this.addWindowFocusListener(new WindowFocusListener(){
+			public void windowGainedFocus(WindowEvent e){}
+			public void windowLostFocus(WindowEvent e){
+			    e.getWindow().toFront();
+			}
+			});
 		
 	}
 }

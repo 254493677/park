@@ -7,11 +7,15 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import cn.edu.buaa.park.ParkManage;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,6 +29,7 @@ public class ParkMain extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	JDialog dialog =null;
+	ParkManage pm = ParkManage.getInstance();
 
 	/**
 	 * Launch the application.
@@ -69,17 +74,23 @@ public class ParkMain extends JFrame {
         item12.setFont(new Font("微软雅黑", Font.PLAIN, 12));
         item12.setText("停车管理员");
         JMenuItem item14 = new JMenuItem();
+        item14.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.exit(0);
+        	}
+        });
         item14.setFont(new Font("微软雅黑", Font.PLAIN, 12));
         item14.setText("退出");
         JMenuItem item22 = new JMenuItem();
 
         item22.setFont(new Font("微软雅黑", Font.PLAIN, 12));
         item22.setText("经理");
-        
-        JMenuItem item31 = new JMenuItem();
-        item31.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-        item31.setText("欢迎");
         JMenuItem item32 = new JMenuItem();
+        item32.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		JOptionPane.showMessageDialog(contentPane, "停车场管理系统V1.0！");
+        	}
+        });
         item32.setFont(new Font("微软雅黑", Font.PLAIN, 12));
         item32.setText("版本信息");
         
@@ -96,12 +107,10 @@ public class ParkMain extends JFrame {
         JMenuItem item21 = new JMenuItem();
 
         item21.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-        item21.setText("boy");
+        item21.setText("Boy");
         
         m2.add(item21);
         m2.add(item22);
-        
-        m3.add(item31);
         m3.add(item32);
         
         menuBar.add(m1);
@@ -147,18 +156,28 @@ public class ParkMain extends JFrame {
 		//创建停车场管理经理
 		menu13.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		new CreateManager().setVisible(true);
+        		if(pm.getParkList().size()==0){
+        			JOptionPane.showMessageDialog(contentPane, "请先创建停车场！");
+        		}else{
+        			new CreateManager().setVisible(true);
+        		}
         	}
         });
 		
 		//创建停车boy
 		item12.addActionListener(new ActionListener() {
 		        	public void actionPerformed(ActionEvent arg0) {
-		        		new CreateBoy().setVisible(true);
+		        		
+		        		if(pm.getParkList().size()==0){
+		        			JOptionPane.showMessageDialog(contentPane, "请先创建停车场！");
+		        		}else{
+		        			new CreateBoy().setVisible(true);
+		        		}
 		        	}
 		});
         m41.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
+        		
         		new ManagerReport().setVisible(true);
         	}
         });
@@ -170,12 +189,23 @@ public class ParkMain extends JFrame {
         
         item21.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		new ParkBoyOperator().setVisible(true);
+        		if(pm.getBoyList().size()==0){
+        			JOptionPane.showMessageDialog(contentPane, "还未创建停车Boy！");
+        		}else{
+        			new ParkBoyOperator().setVisible(true);
+        		}
+        		
         	}
         });
         
         item22.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		if(pm.getManagerList().size()==0){
+        			JOptionPane.showMessageDialog(contentPane, "还未创建停车场经理！");
+        		}else{
+        			new ManagerOperator().setVisible(true);
+        		}
+        		
         	}
         });
 	}

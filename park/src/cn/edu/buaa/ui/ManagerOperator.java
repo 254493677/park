@@ -21,7 +21,7 @@ import java.awt.event.WindowFocusListener;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.Dialog.ModalExclusionType;
+//import java.awt.Dialog.ModalExclusionType;
 import java.util.Vector;
 
 import cn.edu.buaa.park.Park;
@@ -68,7 +68,7 @@ public class ManagerOperator extends JFrame {
 	 * Create the frame.
 	 */
 	public ManagerOperator() {
-		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+//		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("停车场经理操作");
 		setBounds(100, 100, 490, 492);
 		contentPane = new JPanel();
@@ -334,7 +334,10 @@ public class ManagerOperator extends JFrame {
 										 //管理有停车场
 										 if(pb.getParkList().size()>0){
 												//停车场信息
-												textArea_2.setText(pb.printParkInfoForBoy());
+											 	if(pb.getCode().equals(id)){
+											 		textArea_2.setText(pb.printParkInfoForBoy());
+											 	}
+												
 
 										 }
 									 }

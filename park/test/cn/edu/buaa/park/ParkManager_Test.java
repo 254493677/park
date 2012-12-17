@@ -28,6 +28,9 @@ public class ParkManager_Test {
 		this.manager.handleBoy(boyB);
 	}
 	
+	/*
+	 * 	当停33辆车时，测试每停一辆车时停车场经理的空车位数量；
+	 */
 	@Test
 	public void test_empty_num_when_in_thirty_three_car() {
         for(int i = 0; i < 33; i ++) {
@@ -36,6 +39,9 @@ public class ParkManager_Test {
         }
     }
 	
+	/*
+	 * 	当所有停车场已满，再进行停车时失败；
+	 */
 	@Test(expected = ParkException.class)
 	public void in_a_car_when_all_park_is_full() {
         for(int i = 0; i < 34; i ++) {
@@ -43,6 +49,10 @@ public class ParkManager_Test {
         }
     }
 	
+	
+	/*
+	 * 	停一辆车时，根据票据取出来的车还是原来停的那辆车。
+	 */
 	@Test
 	public void out_a_car_when_in_a_car() {
 		Car car = new Car();

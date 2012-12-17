@@ -22,7 +22,7 @@ import java.awt.event.WindowFocusListener;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.Dialog.ModalExclusionType;
+//import java.awt.Dialog.ModalExclusionType;
 import java.util.Vector;
 
 import cn.edu.buaa.park.Park;
@@ -71,7 +71,7 @@ public class CreateManager extends JFrame {
 	 * Create the frame.
 	 */
 	public CreateManager() {
-		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+		//setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("停车经理管理");
 		setBounds(100, 100, 450, 367);
 		contentPane = new JPanel();

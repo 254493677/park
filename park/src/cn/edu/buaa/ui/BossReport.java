@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 
-import java.awt.Dialog.ModalExclusionType;
+//import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
@@ -47,7 +47,7 @@ public class BossReport extends JFrame {
 	 * Create the frame.
 	 */
 	public BossReport() {
-		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+		//setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("停车场Boss报表");
 		setBounds(100, 100, 450, 367);
 		

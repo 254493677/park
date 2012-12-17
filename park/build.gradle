@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.5
+version = ''
+
+repositories {
+       flatDir(dirs: "$projectDir/lib",include: ["*.jar"])
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir(dirs: "$projectDir/lib")
+    }
+}
+
+sourceSets { 
+	 main { 
+		 java.srcDir "$projectDir/src"
+	 } 
+	 test { 
+		 java.srcDir "$projectDir/test/"
+	 }
+ }
+tasks.withType(Compile) {  
+    options.encoding = "UTF-8"  
+}

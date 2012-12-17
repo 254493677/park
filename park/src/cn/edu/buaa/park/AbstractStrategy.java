@@ -9,6 +9,13 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class AbstractStrategy implements Strategy {
-    @Override
-    public abstract Ticket in(Car car, List<Park> parkList);
+    
+    public  Ticket in(Car car, List<Park> parkList){
+    	Ticket  t=null;
+    	return t;
+    };
+    
+    public String getStrategyName(){
+		return null;
+    }
 }

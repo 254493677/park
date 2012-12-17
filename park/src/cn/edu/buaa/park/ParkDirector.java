@@ -40,42 +40,5 @@ public class ParkDirector {
 		return txt;
 	}
 	
-	/**
-	 * 打印员工信息
-	 */
-	private void printEmployee() {
-		if(ParkManage.getInstance().getManagerList().size() == 0 && ParkManage.getInstance().getBoyList().size() == 0) {
-			System.out.println("目前没有创建任何员工！");
-			return;
-		}
-		for(int i = 0; i < ParkManage.getInstance().getManagerList().size(); i ++) {
-			ParkManager manager = ParkManage.getInstance().getManagerList().get(i);
-			List<ParkBoy> boyList = manager.getParkBoyList();
-			String boyCodes = "";
-			if(boyList != null && boyList.size() > 0) {
-				for(ParkBoy boy : boyList) {
-					boyCodes += boy.getCode() + "  ";
-				}
-			} else {
-				boyCodes = "暂时没有管理的停车BOY";
-			}
-			
-			System.out.println("   经理编号：" + manager.getCode());
-			System.out.println("      管理的停车BOY编号：" + boyCodes);
-		}
-		for(int i = 0; i < ParkManage.getInstance().getBoyList().size(); i ++) {
-			ParkBoy boy = ParkManage.getInstance().getBoyList().get(i);
-			Strategy strategy = boy.getStrategy();
-			String strategyName = "";
-			if(strategy instanceof DefaultStrategy) {
-				strategyName = "默认策略";
-			} else if(strategy instanceof AverageStrategy) {
-				strategyName = "平均策略";
-			} else if(strategy instanceof VacancyRateStrategy) {
-				strategyName = "空置率策略";
-			}
-			System.out.println("   停车BOY编号：" + boy.getCode() + "  停车策略：" + strategyName);
-		}
-		System.out.println("-----------------------------------------");
-	}
+	
 }

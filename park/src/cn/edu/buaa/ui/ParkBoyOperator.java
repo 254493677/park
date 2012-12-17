@@ -21,7 +21,7 @@ import java.awt.event.WindowFocusListener;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.Dialog.ModalExclusionType;
+//import java.awt.Dialog.ModalExclusionType;
 import java.util.Vector;
 
 import cn.edu.buaa.park.Park;
@@ -65,7 +65,7 @@ public class ParkBoyOperator extends JFrame {
 	 * Create the frame.
 	 */
 	public ParkBoyOperator() {
-		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+//		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("停车Boy操作");
 		setBounds(100, 100, 490, 330);
 		contentPane = new JPanel();

@@ -33,3 +33,4 @@ sourceSets {
 tasks.withType(Compile) {  
     options.encoding = "UTF-8"  
 }
+jar.baseName = 'parkingLotsModel'
